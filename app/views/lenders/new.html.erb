@@ -1,0 +1,172 @@
+<style type="text/css">
+	h1{
+		font-family: 'Rock Salt', cursive;
+	}
+</style>	
+<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class='title'>Welcome to Mock-Kiva .org</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<h2>Lender</h2>
+			<p>	<%= @notice %></p>
+			<% 			if !@error.nil?
+				@error.each do |error|
+%>					<p class='error'><%= error %></p>				
+<%				end
+			end
+%>
+
+			<form method='post' action='/lenders'>
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+				<table>
+
+					<tbody>
+						<tr>
+							<td>First Name</td>
+							<td>
+								<input type='text' name='lender[first_name]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Last Name</td>
+							<td>
+								<input type='text' name='lender[last_name]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>
+								<input type='text' name='lender[email]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td>
+								<input type='password' name='lender[password]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Password Confirmation</td>
+							<td>
+								<input type='password' name='lender[password_confirmation]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Money</td>
+							<td>
+								<input type='number' name='lender[money]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								<a href="/signin">Already a member?</a>
+							</td>
+							<td>
+								<input type='submit' value='Register'>
+							</td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="col-xs-6">
+			<h2>Borrowers</h2>
+			<p>	<%= @noticeB %></p>
+			<% 			if !@errorB.nil?
+				@errorB.each do |error|
+%>					<p class='error'><%= error %></p>				
+<%				end
+			end
+%>
+
+
+			<form method='post' action='/borrowers'>
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+				<table>
+
+					<tbody>
+						<tr>
+							<td>First Name</td>
+							<td>
+								<input type='text' name='borrower[first_name]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Last Name</td>
+							<td>
+								<input type='text' name='borrower[last_name]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>
+								<input type='text' name='borrower[email]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td>
+								<input type='password' name='borrower[password]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Password Confirmation</td>
+							<td>
+								<input type='password' name='borrower[password_confirmation]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Need Money For: </td>
+							<td>
+								<input type='text' name='borrower[plan]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Description: </td>
+							<td>
+								<textarea name='borrower[description]'></textarea>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Amount Needed:</td>
+							<td>
+								<input type='number' name='borrower[amount]'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								<a href="/signinb">Already a member?</a>
+							</td>
+							<td>
+								<input type='submit' value='Register'>
+							</td>
+							
+						</tr>
+					</tbody>
+				</table>
+				
+			</form>
+		</div>
+	</div>
+	
+</div>

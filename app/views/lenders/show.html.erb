@@ -1,0 +1,110 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9">
+			<table>
+				<tbody>
+					<tr>
+						<td>Name: </td>
+						<td><%= @lender.full_name %></td>
+					</tr>
+					<tr>
+						<td>Account Balance: </td>
+						<td>  $<%= @balance %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-3">
+			<a href="/signout">logout</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<%= flash[:errors] %>
+			<%= flash[:error] %>
+			<h2>List of people in need of help:</h2>
+			<table class='table table-bordered'>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Need Money For</th>
+						<th>Reason for Loan</th>
+						<th>Amount Needed</th>
+						<th>Amount Raised</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+<% 					@borrowers.each do |borrower|
+
+%>	
+					<tr>
+						<td><%= borrower.full_name %></td>
+						<td><%= borrower.plan %></td>
+						<td><%= borrower.description %></td>
+						<td>$<%= borrower.amount %></td>
+							<%
+							amount = 0
+							borrower.transfers.each do |raised|
+								amount = amount + raised.amountlent
+							end
+							 %>
+						<td>$<%= amount %></td>
+						<td>
+							<form method='post' action='/transfers'>
+								<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+								<input type='number' name='amountlent'>
+								<input name="borrower_id" value="<%= borrower.id %>" type="hidden" />
+								<input type='hidden' name='balance' value="<%= @balance %>">
+								<input type='submit' value='Lend'>
+							</form>
+						</td>
+					</tr>
+					<%end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<%= flash[:errors] %>
+			<h2>List of people you lent money to:</h2>
+			<table class='table table-bordered'>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Need Money For</th>
+						<th>Reason for Loan</th>
+						<th>Amount Needed</th>
+						<th>Amount Raised</th>
+						<th>Amount Lent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% x = 0
+						total = 0
+					amount = 0 
+						@transfers1.each do |lent| %>
+					<tr>
+						<% if lent.lender_id == session[:lender_id] 
+								 %>
+								
+							<td><%= lent.borrower.full_name %></td>
+							<td><%= lent.borrower.plan %></td>
+							<td><%= lent.borrower.description %></td>
+							<td><%= lent.borrower.amount %></td>
+							<td><%= Transfer.all.where(borrower_id: lent.borrower.id).sum("amountlent") %></td>
+						<% end %>
+
+						
+						<% if lent.lender_id == session[:lender_id]  %>
+
+							<td><%= lent.amountlent %></td>
+						<% end %>
+					</tr>
+					<%end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

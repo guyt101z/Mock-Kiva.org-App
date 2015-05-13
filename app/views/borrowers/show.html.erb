@@ -1,0 +1,62 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9">
+			<table>
+				<tbody>
+					<tr>
+						<td>Name: </td>
+						<td><%= @borrower.full_name %></td>
+					</tr>
+					<tr>
+						<td>Account Needed: </td>
+						<td>  $<%= @borrower.amount %></td>
+					</tr>
+					<tr>
+						<td>Account Raised: </td>
+						<td>  
+							<% amount =0 
+								
+								@borrower.transfers.each do |raised|
+								amount = amount + raised.amountlent
+								 %>
+							<% end %>
+							$<%= amount %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-3">
+			<a href="/signoutb">logout</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>List of People who lend you money</h2>
+			<table class='table table-bordered'>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Amount Lent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @borrower.transfers.each do |sent| %>
+					<tr>
+						<td>
+							<% @name= Lender.find(sent.lender_id).full_name %>
+							<%= @name %>
+						</td>
+						<td>
+							<% @email= Lender.find(sent.lender_id).email %>
+							<%= @email %>
+						</td>
+						<td><%= sent.amountlent%></td>
+					</tr>
+					<% end %>	
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
