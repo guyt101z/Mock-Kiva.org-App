@@ -3,6 +3,7 @@ Mock Kiva.org Application
 Application uses Ruby on Rails to create an Online Lending System wherein a user can register as either a Borrower or Lender.  After successful registration, user can now login. Upon login, user will be redirected to a page depending on the user's role (Borrower = Borrower's page; Lender = Lender's Page). Borrowers page displays the list of the persons he was able to borrow money from. Lender's page displays a list of all people in need of financial help (borrowers). On the second table, display all the borrowers that the this particular lender has lent money to.
 
 Key Features:
+
 Login and Registration 
 
 Password Encryption
