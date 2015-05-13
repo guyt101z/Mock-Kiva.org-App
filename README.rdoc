@@ -1,28 +1,12 @@
-== README
+Mock Kiva.org Application 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application uses Ruby on Rails to create an Online Lending System wherein a user can register as either a Borrower or Lender.  After successful registration, user can now login. Upon login, user will be redirected to a page depending on the user's role (Borrower = Borrower's page; Lender = Lender's Page). Borrowers page displays the list of the persons he was able to borrow money from. Lender's page displays a list of all people in need of financial help (borrowers). On the second table, display all the borrowers that the this particular lender has lent money to.
 
-Things you may want to cover:
+Key Features:
+Login and Registration 
 
-* Ruby version
+Password Encryption
 
-* System dependencies
+Proper display of data on the borrower's and lender's end. Update of amount lent/borrowed.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+If Lender's account balance is zero, then lender can no longer lend money.
